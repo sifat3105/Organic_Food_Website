@@ -67,7 +67,7 @@
                                 <option value="jp">Japan (JPY)</option>
                             </select>
                         </li>
-                        <li><a href="login.html" class="login-link"><i class="biolife-icon icon-login"></i>Login/Register</a></li>
+                        <li><a href="{% url 'signin' %}" class="login-link"><i class="biolife-icon icon-login"></i>Login/Register</a></li>
                     </ul>
                 </div>
             </div>
@@ -198,7 +198,7 @@
                                                         <li class="menu-item" ><a class="menu-name" href="about-us.html">About Us</a></li>
                                                         <li class="menu-item" ><a class="menu-name" href="checkout.html">Checkout</a></li>
                                                         <li class="menu-item" ><a class="menu-name" href="shopping-cart.html">Shopping Cart</a></li>
-                                                        <li class="menu-item" ><a class="menu-name" href="login.html">Login/Register</a></li>
+                                                        <li class="menu-item" ><a class="menu-name" href="{% url 'signin' %}">Login/Register</a></li>
                                                         <li class="menu-item" ><a class="menu-name" href="404.html">404</a></li>
                                                     </ul>
                                                 </div>
@@ -783,21 +783,11 @@
         </div>
     </header>
 
-    <!--Hero Section-->
-    <div class="hero-section hero-background">
-        <h1 class="page-title">Organic Fruits</h1>
-    </div>
+    {% block Hero_Section %}
+    
+    {% endblock Hero_Section %}
 
-    <!--Navigation section-->
-    <div class="container">
-        <nav class="biolife-nav">
-            <ul>
-                <li class="nav-item"><a href="index-2.html" class="permal-link">Home</a></li>
-                <li class="nav-item"><a href="#" class="permal-link">Natural Organic</a></li>
-                <li class="nav-item"><span class="current-page">Fresh Fruit</span></li>
-            </ul>
-        </nav>
-    </div>
+   
 
     <div class="page-contain category-page no-sidebar">
         <div class="container">

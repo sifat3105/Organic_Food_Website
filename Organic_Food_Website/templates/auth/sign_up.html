@@ -1,0 +1,70 @@
+{% extends "base/base.html" %}
+
+{% block title %} Register-page {% endblock title %}
+
+{% block content %}
+
+<div id="main-content" class="main-content">
+    <div class="container">
+
+        <div class="row">
+
+            <!--Go to login form-->
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="register-in-container">
+                    <div class="intro">
+                        <h4 class="box-title">Returning Customer?</h4>
+                        <p class="sub-title">Welcome back! Please log in to:</p>
+                        <ul class="lis">
+                            <li>View your order history</li>
+                            <li>Track current orders</li>
+                            <li>Access your saved addresses</li>
+                            <li>Manage your Wishlist</li>
+                        </ul>
+                        <a href="{% url 'signin' %}" class="btn btn-bold">Log In Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!--Go to Register form-->
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="signin-container">
+                    <form name="frm-login" method="POST">
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+                        <p class="form-row">
+                            <label for="fid-name">Username:<span class="requite">*</span></label>
+                            {{ form.username }}
+                            <div class="text-danger">{{ form.username.errors }}</div>
+                        </p>
+                        <p class="form-row">
+                            <label for="fid-name">Email Address:<span class="requite">*</span></label>
+                            {{ form.email }}
+                            <div class="text-danger">{{ form.email.errors }}</div>
+                        </p>
+                        <p class="form-row">
+                            <label for="fid-pass">Password:<span class="trequite">*</span></label>
+                            {{ form.password1 }}
+                            <div class="text-danger">{{ form.password1.errors }}</div>
+                        </p>
+                        <p class="form-row">
+                            <label for="fid-pass">Password confirmation:<span class="requite">*</span></label>
+                            {{ form.password2 }}
+                            <div class="text-danger">{{ form.password2.errors }}</div>
+                        </p>
+                        <p class="form-row wrap-btn">
+                            <button class="btn btn-submit btn-bold" type="submit">Sign Up</button>
+                            {% comment %} <a href="#" class="link-to-help">Forgot your password</a> {% endcomment %}
+                        </p>
+                    </form>
+                    
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock content %}
