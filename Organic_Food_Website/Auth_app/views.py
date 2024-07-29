@@ -5,7 +5,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.urls import reverse
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_text
+from django.utils.encoding import force_bytes,force_str
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse
@@ -34,12 +34,12 @@ def sign_up_view(request):
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.is_active = False 
+            user.is_active = False  # Deactivate account until it is confirmed
             user.save()
             # Send verification email
             current_site = get_current_site(request)
             mail_subject = 'Activate your account.'
-            message = render_to_string('email_verification_email.html', {
+            message = render_to_string('auth/email_verification_email.html', {
                 'user': user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
@@ -49,13 +49,13 @@ def sign_up_view(request):
             return redirect('email_verification_sent')
     else:
         form = UserRegistrationForm()
-    return render(request, 'auth/sign_up.html',{'form':form})
+    return render(request, 'auth/sign_up.html', {'form': form})
 
 
 def activate_account(request, uidb64, token):
     User = get_user_model()
     try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
+        uid = force_str(urlsafe_base64_decode(uidb64))
         user = get_object_or_404(User, pk=uid)
         if email_verification_token.check_token(user, token):
             user.is_active = True
@@ -67,3 +67,7 @@ def activate_account(request, uidb64, token):
             return HttpResponse('Activation link is invalid!')
     except (TypeError, ValueError, OverflowError, user.DoesNotExist):
         return HttpResponse('Activation link is invalid!')
+    
+    
+def email_verification_sent(request):
+    return render(request, 'auth/email_verification.html')

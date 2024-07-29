@@ -1,0 +1,91 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="x-apple-disable-message-reformatting">
+  <title>Email Verification</title>
+  <style type="text/css">
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #F7F8F9;
+      color: #000;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    .container {
+      width: 100%;
+      max-width: 500px;
+      margin: auto;
+      background-color: #fff;
+    }
+    .header, .footer {
+      text-align: center;
+      padding: 20px;
+    }
+    .header img, .footer img {
+      max-width: 100%;
+      height: auto;
+    }
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 14px;
+      color: #fff;
+      background-color: #ff3d00;
+      text-decoration: none;
+      border-radius: 4px;
+      text-align: center;
+    }
+    .content {
+      padding: 20px;
+      text-align: center;
+    }
+    .content h1 {
+      font-size: 33px;
+      color: #ff4e00;
+      margin: 0 0 10px;
+    }
+    .content p {
+      font-size: 23px;
+      line-height: 1.4;
+      margin: 0 0 20px;
+    }
+    @media only screen and (max-width: 520px) {
+      .container {
+        width: 100% !important;
+        padding: 0 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <table class="container">
+    <tr>
+      <td class="header">
+        <img src="{% static 'assets/images/organic-3.png' %}" alt="Email Verification" />
+      </td>
+    </tr>
+    <tr>
+      <td class="content">
+        <h1>Hey, thanks for signing up!</h1>
+        <p>Confirm your email, and start creating stunning emails and landing pages.</p>
+        <a href="http://{{ domain }}{% url 'activate_account' uidb64=uid token=token %}" class="button">Confirm my email address</a>
+      </td>
+    </tr>
+    <tr>
+      <td class="footer">
+        <img src="{% static 'assets/images/verification.png' %}" alt="Footer Image" />
+        <p>Thank you for registering. Please click the link below to activate your account: <a href="http://{{ domain }}{% url 'activate_account' uidb64=uid token=token %}">Activate Account</a></p>
+        <p>If you did not register for this account, please ignore this email.</p>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
