@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login,authenticate, get_user_model, update_session_auth_hash, logout
 from django.contrib.auth.views import PasswordResetView
+from django.contrib.auth.forms import PasswordResetForm
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.mail import send_mail
+from django.core.exceptions import ValidationError
 from django.conf import settings
 from django.urls import reverse, reverse_lazy
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -74,7 +76,12 @@ def activate_account(request, uidb64, token):
 def email_verification_sent(request):
     return render(request, 'auth/email_verification.html')
 
-
+class CustomPasswordResetForm(PasswordResetForm):
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if not User.objects.filter(email=email).exists():
+            raise ValidationError("There is no user registered with the specified email address.")
+        return email
 
 class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
     template_name = 'auth/password_reset//password_reset.html'
