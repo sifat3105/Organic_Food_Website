@@ -25,7 +25,12 @@ SECRET_KEY = 'django-insecure-3x*w++$m0ot6bksuk67(^*w%(ha$#p78#s42#klufh8mguk_5h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    '90be-59-152-14-233.ngrok-free.app',  # Add your ngrok URL here
+]
 
 
 # Application definition
@@ -43,6 +48,9 @@ INSTALLED_APPS = [
     'Auth_app',
     'cart_Checkout',
     'Account_Dashboard',
+    'Orders',
+    'Payments',
+    'Reviews',
 ]
 
 JAZZMIN_SETTINGS = {

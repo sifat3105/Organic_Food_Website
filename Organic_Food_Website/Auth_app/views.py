@@ -16,6 +16,8 @@ from django.http import HttpResponse
 from .models import profile
 from .forms import UserRegistrationForm, UserLoginForm
 from .tokens import email_verification_token
+from django.utils.translation import gettext as _
+
 # Create your views here.
 
 User = get_user_model()
@@ -80,18 +82,18 @@ class CustomPasswordResetForm(PasswordResetForm):
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if not User.objects.filter(email=email).exists():
-            raise ValidationError("There is no user registered with the specified email address.")
+            raise ValidationError(_("There is no user registered with the specified email address."))
         return email
 
 class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
-    template_name = 'auth/password_reset//password_reset.html'
-    email_template_name = 'auth/password_reset//password_reset_email.html'
+    template_name = 'auth/password_reset/password_reset.html'
+    email_template_name = 'auth/password_reset/password_reset_email.html'
     subject_template_name = 'auth/password_reset/password_reset_subject.txt'
-    success_message = "We've emailed you instructions for setting your password, " \
-                      "if an account exists with the email you entered. You should receive them shortly." \
-                      " If you don't receive an email, " \
-                      "please make sure you've entered the address you registered with, and check your spam folder."
+    success_message = _("We've emailed you instructions for setting your password, "
+                        "if an account exists with the email you entered. You should receive them shortly."
+                        " If you don't receive an email, "
+                        "please make sure you've entered the address you registered with, and check your spam folder.")
     success_url = reverse_lazy('password_reset_mail_sended')
-    
+    form_class = CustomPasswordResetForm
 def password_reset_mail_sended(request):
     return render(request, 'auth/password_reset/password_reset_mail_sended.html')
