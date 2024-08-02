@@ -189,56 +189,57 @@
                             <div class="row">
                                 <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
                                     <div class="rating-info">
-                                        <p class="index"><strong class="rating">4.4</strong>out of 5</p>
+                                        <p class="index"><strong class="rating">{{product_review.rating_out_of_5}}</strong>out of 5</p>
                                         <div class="rating"><p class="star-rating"><span class="width-80percent"></span></p></div>
-                                        <p class="see-all">See all 68 reviews</p>
+                                        <p class="see-all">See all {{product_review.total_ratings}} reviews</p>
                                         <ul class="options">
                                             <li>
                                                 <div class="detail-for">
                                                     <span class="option-name">5stars</span>
                                                     <span class="progres">
-                                                        <span class="line-100percent"><span class="percent width-90percent"></span></span>
+                                                        <span class="line-100percent"><span class="percent width-{{product_review.stars.star_5_percent}}percent"></span></span>
                                                     </span>
-                                                    <span class="number">90</span>
+                                                    <span class="number">{{product_review.stars.star_5_percent}}%</span>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div class="detail-for">
                                                     <span class="option-name">4stars</span>
                                                     <span class="progres">
-                                                        <span class="line-100percent"><span class="percent width-30percent"></span></span>
+                                                        <span class="line-100percent"><span class="percent width-{{product_review.stars.star_4_percent}}percent"></span></span>
                                                     </span>
-                                                    <span class="number">30</span>
+                                                    <span class="number">{{product_review.stars.star_4_percent}}%</span>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div class="detail-for">
                                                     <span class="option-name">3stars</span>
                                                     <span class="progres">
-                                                        <span class="line-100percent"><span class="percent width-40percent"></span></span>
+                                                        <span class="line-100percent"><span class="percent width-{{product_review.stars.star_3_percent}}percent"></span></span>
                                                     </span>
-                                                    <span class="number">40</span>
+                                                    <span class="number">{{product_review.stars.star_3_percent}}%</span>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div class="detail-for">
                                                     <span class="option-name">2stars</span>
                                                     <span class="progres">
-                                                        <span class="line-100percent"><span class="percent width-20percent"></span></span>
+                                                        <span class="line-100percent"><span class="percent width-{{product_review.stars.star_2_percent}}percent"></span></span>
                                                     </span>
-                                                    <span class="number">20</span>
+                                                    <span class="number">{{product_review.stars.star_2_percent}}%</span>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div class="detail-for">
                                                     <span class="option-name">1star</span>
                                                     <span class="progres">
-                                                        <span class="line-100percent"><span class="percent width-10percent"></span></span>
+                                                        <span class="line-100percent"><span class="percent width-{{product_review.stars.star_1_percent}}percent"></span></span>
                                                     </span>
-                                                    <span class="number">10</span>
+                                                    <span class="number">{{product_review.stars.star_1_percent}}%</span>
                                                 </div>
                                             </li>
                                         </ul>
+                                        
                                     </div>
                                 </div>
                                 <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">

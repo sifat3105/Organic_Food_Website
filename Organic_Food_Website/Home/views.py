@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from Product.models import Product , Category
-from Reviews.views import product_reviews
+
 
 # Create your views here.
 
@@ -21,5 +21,4 @@ def home_view(request):
 
 
 def check_view(request):
-    print(product_reviews('30ebd947-a615-4c54-b302-b6778e73f6b7'))
     return render(request, 'check.html')
