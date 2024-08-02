@@ -67,7 +67,7 @@
                                 <option value="jp">Japan (JPY)</option>
                             </select>
                         </li>
-                        <li><a href="{% url 'signin' %}" class="login-link"><i class="biolife-icon icon-login"></i>Login/Register</a></li>
+                        <li><a href="{{log_reg_link}}" class="login-link"><i class="biolife-icon icon-login"></i>{{log_reg}}</a></li>
                     </ul>
                 </div>
             </div>
@@ -789,18 +789,13 @@
 
    
 
-    <div class="page-contain category-page no-sidebar">
-        <div class="container">
-            <div class="row">
+  
 
                 <!-- Main content -->
                 {% block content %}
                 
                 {% endblock content %}
-            </div>
-        </div>
-    </div>
-
+  
     <!-- FOOTER -->
     <footer id="footer" class="footer layout-03">
         <div class="footer-content background-footer-03">
@@ -1001,6 +996,8 @@
     <script src="{% static 'assets/js/slick.min.js' %}"></script>
     <script src="{% static 'assets/js/biolife.framework.js' %}"></script>
     <script src="{% static 'assets/js/functions.js' %}"></script>
+    
+    
 </body>
 
 </html>

@@ -97,3 +97,8 @@ class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
     form_class = CustomPasswordResetForm
 def password_reset_mail_sended(request):
     return render(request, 'auth/password_reset/password_reset_mail_sended.html')
+
+
+def logout_view(request):
+    logout(request)
+    return redirect ('home')
