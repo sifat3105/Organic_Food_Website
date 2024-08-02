@@ -1,4 +1,6 @@
+
 {% extends "base/base.html" %}
+{% load custom_tags %}
 {% block title %}Product{% endblock title %}
 
 {% block content %}
@@ -197,7 +199,7 @@
                                                 <div class="detail-for">
                                                     <span class="option-name">5stars</span>
                                                     <span class="progres">
-                                                        <span class="line-100percent"><span class="percent width-{{product_review.stars.star_5_percent}}percent"></span></span>
+                                                        <span class="line-100percent"><span class="percent width-{{ product_review.stars.star_5_percent }}percent"></span></span>
                                                     </span>
                                                     <span class="number">{{product_review.stars.star_5_percent}}%</span>
                                                 </div>
@@ -206,7 +208,7 @@
                                                 <div class="detail-for">
                                                     <span class="option-name">4stars</span>
                                                     <span class="progres">
-                                                        <span class="line-100percent"><span class="percent width-{{product_review.stars.star_4_percent}}percent"></span></span>
+                                                        <span class="line-100percent"><span class="percent width-{{ product_review.stars.star_4_percent }}percent"></span></span>
                                                     </span>
                                                     <span class="number">{{product_review.stars.star_4_percent}}%</span>
                                                 </div>
@@ -215,7 +217,7 @@
                                                 <div class="detail-for">
                                                     <span class="option-name">3stars</span>
                                                     <span class="progres">
-                                                        <span class="line-100percent"><span class="percent width-{{product_review.stars.star_3_percent}}percent"></span></span>
+                                                        <span class="line-100percent"><span class="percent width-{{ product_review.stars.star_3_percent }}percent"></span></span>
                                                     </span>
                                                     <span class="number">{{product_review.stars.star_3_percent}}%</span>
                                                 </div>
@@ -224,7 +226,7 @@
                                                 <div class="detail-for">
                                                     <span class="option-name">2stars</span>
                                                     <span class="progres">
-                                                        <span class="line-100percent"><span class="percent width-{{product_review.stars.star_2_percent}}percent"></span></span>
+                                                        <span class="line-100percent"><span class="percent width-{{ product_review.stars.star_2_percent }}percent"></span></span>
                                                     </span>
                                                     <span class="number">{{product_review.stars.star_2_percent}}%</span>
                                                 </div>
@@ -233,7 +235,7 @@
                                                 <div class="detail-for">
                                                     <span class="option-name">1star</span>
                                                     <span class="progres">
-                                                        <span class="line-100percent"><span class="percent width-{{product_review.stars.star_1_percent}}percent"></span></span>
+                                                        <span class="line-100percent"><span class="percent width-{{ product_review.stars.star_1_percent }}percent"></span></span>
                                                     </span>
                                                     <span class="number">{{product_review.stars.star_1_percent}}%</span>
                                                 </div>
@@ -307,14 +309,16 @@
                             </div>
                             <div id="comments">
                                 <ol class="commentlist">
+                                    {% for review in product_review.reviews %}
+                                    
                                     <li class="review">
                                         <div class="comment-container">
                                             <div class="row">
                                                 <div class="comment-content col-lg-8 col-md-9 col-sm-8 col-xs-12">
-                                                    <p class="comment-in"><span class="post-name">Quality is our way of life</span><span class="post-date">01/04/2018</span></p>
-                                                    <div class="rating"><p class="star-rating"><span class="width-80percent"></span></p></div>
-                                                    <p class="author">by: <b>Shop organic</b></p>
-                                                    <p class="comment-text">There are few things in life that please people more than the succulence of quality fresh fruit and vegetables.  At Fresh Fruits we work to deliver the world’s freshest, choicest, and juiciest produce to discerning customers across the UAE and GCC.</p>
+                                                    <p class="comment-in"><span class="post-name">Quality is our way of life</span><span class="post-date">{{review.created}}</span></p>
+                                                    <div class="rating"><p class="star-rating"><span class="width-{% calculate_percentage review.rating %}percent"></span></p></div>
+                                                    <p class="author">by: <b>{{review.user.first_name}}</b></p>
+                                                    <p class="comment-text">{{review.comment}}.</p>
                                                 </div>
                                                 <div class="comment-review-form col-lg-3 col-lg-offset-1 col-md-3 col-sm-4 col-xs-12">
                                                     <span class="title">Was this review helpful?</span>
@@ -327,46 +331,8 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="review">
-                                        <div class="comment-container">
-                                            <div class="row">
-                                                <div class="comment-content col-lg-8 col-md-9 col-sm-8 col-xs-12">
-                                                    <p class="comment-in"><span class="post-name">Quality is our way of life</span><span class="post-date">01/04/2018</span></p>
-                                                    <div class="rating"><p class="star-rating"><span class="width-80percent"></span></p></div>
-                                                    <p class="author">by: <b>Shop organic</b></p>
-                                                    <p class="comment-text">There are few things in life that please people more than the succulence of quality fresh fruit and vegetables.  At Fresh Fruits we work to deliver the world’s freshest, choicest, and juiciest produce to discerning customers across the UAE and GCC.</p>
-                                                </div>
-                                                <div class="comment-review-form col-lg-3 col-lg-offset-1 col-md-3 col-sm-4 col-xs-12">
-                                                    <span class="title">Was this review helpful?</span>
-                                                    <ul class="actions">
-                                                        <li><a href="#" class="btn-act like" data-type="like"><i class="fa fa-thumbs-up" aria-hidden="true"></i>Yes (100)</a></li>
-                                                        <li><a href="#" class="btn-act hate" data-type="dislike"><i class="fa fa-thumbs-down" aria-hidden="true"></i>No (20)</a></li>
-                                                        <li><a href="#" class="btn-act report" data-type="dislike"><i class="fa fa-flag" aria-hidden="true"></i>Report</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="review">
-                                        <div class="comment-container">
-                                            <div class="row">
-                                                <div class="comment-content col-lg-8 col-md-9 col-sm-8 col-xs-12">
-                                                    <p class="comment-in"><span class="post-name">Quality is our way of life</span><span class="post-date">01/04/2018</span></p>
-                                                    <div class="rating"><p class="star-rating"><span class="width-80percent"></span></p></div>
-                                                    <p class="author">by: <b>Shop organic</b></p>
-                                                    <p class="comment-text">There are few things in life that please people more than the succulence of quality fresh fruit and vegetables.  At Fresh Fruits we work to deliver the world’s freshest, choicest, and juiciest produce to discerning customers across the UAE and GCC.</p>
-                                                </div>
-                                                <div class="comment-review-form col-lg-3 col-lg-offset-1 col-md-3 col-sm-4 col-xs-12">
-                                                    <span class="title">Was this review helpful?</span>
-                                                    <ul class="actions">
-                                                        <li><a href="#" class="btn-act like" data-type="like"><i class="fa fa-thumbs-up" aria-hidden="true"></i>Yes (100)</a></li>
-                                                        <li><a href="#" class="btn-act hate" data-type="dislike"><i class="fa fa-thumbs-down" aria-hidden="true"></i>No (20)</a></li>
-                                                        <li><a href="#" class="btn-act report" data-type="dislike"><i class="fa fa-flag" aria-hidden="true"></i>Report</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
+                                    {% endfor %}
+                                    
                                 </ol>
                                 <div class="biolife-panigations-block version-2">
                                     <ul class="panigation-contain">
