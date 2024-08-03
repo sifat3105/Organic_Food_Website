@@ -1,0 +1,160 @@
+{% extends "base/base.html" %}
+
+{% block title %}User Dashboard{% endblock title %}
+
+{% block content %}
+    <style>
+        .card-title {
+            font-weight: bold;
+            font-size: 1.2em; /* Increase by 20% */
+        }
+        .badge {
+            font-size: 1.08em; /* Increase by 20% */
+        }
+        .list-group-item {
+            font-size: 1.2em; /* Increase by 20% */
+        }
+        .card-text, .card-body p, .card-body h6 {
+            font-size: 1.2em; /* Increase by 20% */
+        }
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
+        }
+        .badge-shipped {
+            background-color: green;
+        }
+        .badge-pending {
+            background-color: red;
+        }
+    </style>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action active">Account Main</a>
+                    <a href="#" class="list-group-item list-group-item-action">New Orders</a>
+                    <a href="#" class="list-group-item list-group-item-action">Orders History</a>
+                    <a href="#" class="list-group-item list-group-item-action">My Wishlist</a>
+                    <a href="#" class="list-group-item list-group-item-action">Transactions</a>
+                    <a href="#" class="list-group-item list-group-item-action">Profile Setting</a>
+                    <a href="#" class="list-group-item list-group-item-action">Log Out</a>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img src="https://via.placeholder.com/150" class="img-fluid rounded-circle" alt="Profile Picture">
+                            </div>
+                            <div class="col-md-10">
+                                <h5 class="card-title">Mr. Jackson Mike</h5>
+                                <p class="card-text">Email: myusername@gmail.com, Phone: +123456789098</p>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p><i class="fas fa-map-marker-alt"></i> United States, 3601 Old Capitol Trail, Unit A-7, Suite</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><i class="fas fa-map-marker-alt"></i> Moscow city, Street name, Building lenin, House 77</p>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary btn-sm">Add New Address</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h5 class="mt-4">Your orders</h5>
+
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h6 class="card-title">Order ID: 8924 <span class="badge badge-shipped">Shipped</span></h6>
+                        <p>Date: 16 December 2022</p>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6>Contact</h6>
+                                <p>Mike Johnatan<br>Phone: 371-295-9131<br>Email: info@mywebsite.com</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Shipping address</h6>
+                                <p>3601 Old Capitol Trail, Unit A-7, Suite 170777, Wilmington, DE 19808</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Payment</h6>
+                                <p>Visa **** 4216<br>Shipping fee: $56<br>Total paid: $456</p>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <img src="https://via.placeholder.com/150" class="img-fluid" alt="T-shirts with multiple colors">
+                                <p>2x = $25.98</p>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="https://via.placeholder.com/150" class="img-fluid" alt="Gaming Headset 32db Black">
+                                <p>2x = $339.90</p>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="https://via.placeholder.com/150" class="img-fluid" alt="Apple Watch Series 4 Space Gray">
+                                <p>2x = $339.90</p>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <button class="btn btn-danger btn-sm">Cancel Order</button>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <button class="btn btn-primary btn-sm">Track Order</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h6 class="card-title">Order ID: 9088 <span class="badge badge-pending">Pending</span></h6>
+                        <p>Date: 16 December 2022</p>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6>Contact</h6>
+                                <p>Mike Johnatan<br>Phone: 371-295-9131<br>Email: info@mywebsite.com</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Shipping address</h6>
+                                <p>600 Markley Street, Suite 170777, Port Reading, NJ 07064</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Payment</h6>
+                                <p>Visa **** 4216<br>Shipping fee: $56<br>Total paid: $456</p>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <img src="https://via.placeholder.com/150" class="img-fluid" alt="T-shirts with multiple colors">
+                                <p>2x = $25.98</p>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="https://via.placeholder.com/150" class="img-fluid" alt="Gaming Headset 32db Black">
+                                <p>2x = $339.90</p>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="https://via.placeholder.com/150" class="img-fluid" alt="Apple Watch Series 4 Space Gray">
+                                <p>2x = $339.90</p>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <button class="btn btn-danger btn-sm">Cancel Order</button>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <button class="btn btn-primary btn-sm">Track Order</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
