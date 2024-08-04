@@ -1,10 +1,12 @@
-from django.shortcuts import render,redirect, get_object_or_404
-from .models import Cart, CartItem, Product
+from django.shortcuts import render,redirect, get_object_or_404 
 from django.http import JsonResponse
-from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404
-from .context_processors import cart_view
 from decimal import Decimal
+from Account_Dashboard.models import ShippingAddress, Account
+from Account_Dashboard.forms import ShippingAddressForm
+from .context_processors import cart_view
+from .models import Cart, CartItem, Product
+
 # Create your views here.
 
 
@@ -46,6 +48,7 @@ def cart_view(request):
     if total_price_percentage == 100:
         total_price = cart_total_price
         shipping_fee = '0.00'
+        
     return render(request, 'cart/cart.html', {
         'total_price':total_price,
         'total_price_percentage':total_price_percentage,
@@ -58,4 +61,42 @@ def remove_from_cart(request, item_id):
     cart_item = get_object_or_404(CartItem, id=item_id)
     cart_item.delete()
     return redirect(request.META.get('HTTP_REFERER', '/'))
+
+def checkout_view(request):
+    account, created = Account.objects.get_or_create(user=request.user)
+    try:
+        shipping_address = ShippingAddress.objects.get(user=request.user)
+        form_title = "Update Shipping Address"
+    except ShippingAddress.DoesNotExist:
+        shipping_address = None
+        form_title = "Create Shipping Address"
+    
+    if request.method == "POST":
+        number = request.POST.get('number')
+        checkbox = request.POST.get('flexRadioDefault')
+        account.phone_number = number
+        account.save()
+        form = ShippingAddressForm(request.POST, instance=shipping_address)
+        if form.is_valid():
+            shipping_address = form.save(commit=False)
+            shipping_address.user = request.user
+            shipping_address.save()
+            return redirect('payment')
+    else:
+        form = ShippingAddressForm(instance=shipping_address)
+        
+    cart = get_object_or_404(Cart, user=request.user)
+    cart_items = CartItem.objects.filter(cart=cart)
+    
+    shipping_fee = Decimal(cart.get_shipping_fee())
+    sub_total = cart.get_total_price ()
+    total_price = sub_total + shipping_fee
+    return render(request, 'cart/checkout.html', {
+        'shipping_address':shipping_address,
+        'form':form,
+        'cart':cart,
+        'cart_items':cart_items,
+        'shipping_fee':shipping_fee,
+        'total_price':total_price
+    })
     

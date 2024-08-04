@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from Product.models import Product 
+from decimal import Decimal
 
 class Cart(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='cart')
@@ -9,9 +10,25 @@ class Cart(models.Model):
 
     def __str__(self):
         return f'Cart {self.id} for {self.user.username}'
+    
 
     def get_total_price(self):
         return sum(item.get_total_price() for item in self.items.all())
+    
+    def get_shipping_fee(cart):
+        shipping_fee = 10.00
+        desi_ship = Decimal(shipping_fee)
+        cart_total_price = cart.get_total_price()
+        total_price = cart_total_price + desi_ship
+        total_price_percentage = min(round(cart_total_price / 5), 100)
+        
+        if total_price_percentage == 100:
+            total_price = cart_total_price
+            shipping_fee = Decimal('0.00')
+        
+        return shipping_fee
+    
+    
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, related_name='items', on_delete=models.CASCADE)

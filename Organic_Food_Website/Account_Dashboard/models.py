@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 class Account(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='account')
     image  = models.ImageField(upload_to="profile_image/", max_length=255, blank=True, null=True)
     is_verified = models.BooleanField(default=False)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
