@@ -34,6 +34,8 @@ ALLOWED_HOSTS = [
 ]
 
 LOGIN_URL = '/authentication/sign-in/'
+LOGOUT_REDIRECT_URL = '/'
+
 
 
 # Application definition

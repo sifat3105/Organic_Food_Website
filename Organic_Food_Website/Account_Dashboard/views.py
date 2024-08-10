@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from .models import ShippingAddress,BillingAddress, Account
-from django.http import HttpResponseRedirect
 from .utils import convert_image_size
+from Orders.models import Order
 
 def account_dashboard(request, username):
     if request.method == 'POST':
@@ -19,7 +19,8 @@ def account_dashboard(request, username):
     shipping = f'{shippings.country}, {shippings.state}, {shippings.city}, {shippings.street_address}'
     billing = f'{billings.country}, {billings.state}, {billings.city}, {billings.street_address}'
     address = {"shipping":shipping,"billing":billing}
-       
+    orders = Order.objects.filter(user = request.user)
+        
     context = {
         
         'username':username,
@@ -32,17 +33,4 @@ def account_dashboard(request, username):
 
 
 
-def update_profile_picture(request):
-    try:
-        account = Account.objects.get(user=request.user)
-    except Account.DoesNotExist:
-        return redirect('user_dashboard')  # Handle case where account does not exist
 
-    if request.method == 'POST':
-        form = ProfilePictureForm(request.POST, request.FILES, instance=account)
-        if form.is_valid():
-            form.save()
-            return redirect('user_dashboard')  # Redirect to the user dashboard or another relevant page
-    else:
-        form = ProfilePictureForm(instance=account)
-    return render(request, 'account/account_dashboard.html', {'form': form})

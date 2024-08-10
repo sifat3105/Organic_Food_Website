@@ -27,7 +27,29 @@
         .badge-pending {
             background-color: red;
         }
+        .img-small {
+            width: 70%; /* 30% smaller than the original size */
+            height: auto; /* Maintain aspect ratio */
+        }
+        
+        .shadow-img {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adjust shadow properties as needed */
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card-header .btn-group {
+            display: flex;
+        }
+        .divider {
+            border-top: 1px solid #ddd;
+            margin: 1rem 0;
+        }
     </style>
+    
     <div  class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div style="display: flex; justify-content: center; align-items: center; height: 100vh;" class="modal-dialog" role="document">
           <div class="modal-content">
@@ -56,8 +78,8 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action active">Account Main</a>
-                    <a href="#" class="list-group-item list-group-item-action">New Orders</a>
+                    <a href="#" class="list-group-item list-group-item-action active" data-order="order-1">Account Main</a>
+                    <a href="#" class="list-group-item list-group-item-action" data-order="order-2">New Orders</a>
                     <a href="#" class="list-group-item list-group-item-action">Orders History</a>
                     <a href="#" class="list-group-item list-group-item-action">My Wishlist</a>
                     <a href="#" class="list-group-item list-group-item-action">Transactions</a>
@@ -66,7 +88,7 @@
                 </div>
             </div>
             <div class="col-md-9">
-                <div class="card">
+                <div id="order-1" class="card order-card">
                     <div class="card-body">
                         <div class="row">
                             <!-- Include Font Awesome if not already included -->
@@ -107,7 +129,8 @@
                 </div>
 
                 <h5 class="mt-4">Your orders</h5>
-
+                {% for order in orders %}
+                
                 <div class="card mt-3">
                     <div class="card">
                         <div class="card-body">
@@ -135,40 +158,18 @@
                             </div>
                             <div class="divider"></div>
                             <div class="row mt-3">
+                                {% for item in order.items.all %}
                                 <div class="col-md-4">
-                                    <img src="https://via.placeholder.com/150" class="img-fluid" alt="T-shirts with multiple colors">
-                                    <h6 class="mt-2">T-shirts with multiple colors</h6>
-                                    <p>2x = $25.98</p>
+                                    <img src="{{ item.get_product_image }}" class="img-fluid img-small shadow-img" alt="{{ item.product.name }}">
+                                    <h6 class="mt-2">{{ item.product.name }}</h6>
+                                    <p>{{ item.quantity }}x = ${{ item.price }}</p>
                                 </div>
-                                <div class="col-md-4">
-                                    <img src="https://via.placeholder.com/150" class="img-fluid" alt="Gaming Headset 32db Black">
-                                    <h6 class="mt-2">Gaming Headset 32db Black</h6>
-                                    <p>2x = $339.90</p>
-                                </div>
-                                <div class="col-md-4">
-                                    <img src="https://via.placeholder.com/150" class="img-fluid" alt="Apple Watch Series 4 Space Gray">
-                                    <h6 class="mt-2">Apple Watch Series 4 Space Gray</h6>
-                                    <p>2x = $339.90</p>
-                                </div>
+                                {% endfor %}
                             </div>
-                            
                         </div>
                     </div>
                 </div>
-                <style>
-                    .card-header {
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                    }
-                    .card-header .btn-group {
-                        display: flex;
-                    }
-                    .divider {
-                        border-top: 1px solid #ddd;
-                        margin: 1rem 0;
-                    }
-                </style>
+                {% endfor %}
                 <div class="card mt-3">
                     <div class="card-body">
                         <h6 class="card-title">Order ID: 9088 <span class="badge badge-pending">Pending</span></h6>
