@@ -33,6 +33,8 @@ ALLOWED_HOSTS = [
     '90be-59-152-14-233.ngrok-free.app',  # Add your ngrok URL here
 ]
 
+LOGIN_URL = '/authentication/sign-in/'
+
 
 # Application definition
 

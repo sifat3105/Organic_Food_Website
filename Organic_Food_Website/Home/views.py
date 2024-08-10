@@ -17,6 +17,8 @@ def home_view(request):
     products_lemon = Product.objects.filter(category=category_lemon) if category_lemon else Product.objects.none()
     products_vegetables = Product.objects.filter(category=category_vegetables) if category_vegetables else Product.objects.none()
     
+    print(request.user)
+    
     return render(request, 'home/home.html', locals())
 
 

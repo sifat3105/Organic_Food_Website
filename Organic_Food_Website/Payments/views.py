@@ -1,11 +1,15 @@
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.csrf import csrf_exempt
 from sslcommerz_lib import SSLCOMMERZ
 from decimal import Decimal
 from cart_Checkout.models import Cart
+from Orders.models import Order
+import logging
 
 # Create your views here.
 
 
+logger = logging.getLogger(__name__)
 def ssl_payment(request):
     cart = get_object_or_404(Cart, user = request.user)
     total_amount = cart.get_total_price() + Decimal(cart.get_shipping_fee())
@@ -17,9 +21,9 @@ def ssl_payment(request):
     post_body['total_amount'] = 100.26
     post_body['currency'] = "BDT"
     post_body['tran_id'] = "12345"
-    post_body['success_url'] = "http://localhost/payment/success/"
-    post_body['fail_url'] = "http://localhost/payment/failed/"
-    post_body['cancel_url'] = "http://localhost/payment/cancel/"
+    post_body['success_url'] = "http://127.0.0.1:8000/payment/success/"
+    post_body['fail_url'] = "http://127.0.0.1:8000/payment/failed/"
+    post_body['cancel_url'] = "http://127.0.0.1:8000/payment/cancel/"
     post_body['emi_option'] = 0
     post_body['cus_name'] = "test"
     post_body['cus_email'] = "test@test.com"
@@ -42,13 +46,14 @@ def ssl_payment(request):
 
 
 
-
-
 def payment_failed(request):
     return render(request, 'payment/payment_failed.html')
 
+@csrf_exempt
 def payment_success(request):
-    return render(request, 'payment/payment_success.html')
+    
+    return redirect('order')
+    # return render(request, 'payment/payment_success.html')
 
 def payment_cancel(request):
     return render(request, 'payment/payment_cancel.html')

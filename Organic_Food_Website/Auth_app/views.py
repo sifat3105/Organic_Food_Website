@@ -100,4 +100,4 @@ def password_reset_mail_sended(request):
 
 def logout_view(request):
     logout(request)
-    return redirect ('home')
+    return redirect('home')

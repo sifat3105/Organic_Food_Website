@@ -1,0 +1,47 @@
+{% extends "admin/edit_inline/tabular.html" %}
+{% load static %}
+
+{% block inline_fieldset %}
+<style>
+    /* CSS to align image on the left and fields on the right */
+.form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.form-row-left {
+    flex: 0 0 60px; /* Adjust width as needed */
+    margin-right: 10px;
+}
+
+.form-row-right {
+    flex: 1;
+}
+
+.image-container {
+    width: 60px; /* Adjust width as needed */
+}
+
+</style>
+<fieldset class="module aligned">
+    <div class="form-row">
+        {% for field in inline_admin_formset %}
+            <div class="form-row">
+                <div class="form-row-left">
+                    {% if field.field.name == 'product_image' %}
+                        <div class="image-container">
+                            <img src="{{ field.value }}" style="width: 50px; height: auto;" alt="Product Image">
+                        </div>
+                    {% else %}
+                        {{ field.field.label_tag }} {{ field.field }}
+                    {% endif %}
+                </div>
+                <div class="form-row-right">
+                    {{ field.errors }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</fieldset>
+{% endblock %}
