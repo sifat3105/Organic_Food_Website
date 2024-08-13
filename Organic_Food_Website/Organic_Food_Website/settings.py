@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'Orders',
     'Payments',
     'Reviews',
+    'Admin_Dashboard',
 ]
 
 JAZZMIN_SETTINGS = {

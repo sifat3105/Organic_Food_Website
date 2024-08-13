@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin2/', admin.site.urls),
     path('', include('Home.urls')),
     path('authentication/',include('Auth_app.urls')),
     path('account/', include('Account_Dashboard.urls')),
@@ -13,6 +13,7 @@ urlpatterns = [
     path('cart/', include('cart_Checkout.urls')),
     path('payment/', include('Payments.urls')),
     path('order/', include('Orders.urls')),
+    path('dashboard/', include('Admin_Dashboard.urls')),
 ]
 
 
