@@ -1,18 +1,23 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.sites.shortcuts import get_current_site
 from sslcommerz_lib import SSLCOMMERZ
 from decimal import Decimal
 from cart_Checkout.models import Cart
 from Orders.models import Order
 import logging
 
-# Create your views here.
+
+            
+           
 
 
 logger = logging.getLogger(__name__)
 def ssl_payment(request):
     cart = get_object_or_404(Cart, user = request.user)
     total_amount = cart.get_total_price() + Decimal(cart.get_shipping_fee())
+    current_site = get_current_site(request)          
+    domain=current_site.domain
     
     from sslcommerz_lib import SSLCOMMERZ 
     settings = { 'store_id': 'acb66a8f8a1790cf', 'store_pass': 'acb66a8f8a1790cf@ssl', 'issandbox': True }
@@ -21,9 +26,9 @@ def ssl_payment(request):
     post_body['total_amount'] = 100.26
     post_body['currency'] = "BDT"
     post_body['tran_id'] = "12345"
-    post_body['success_url'] = "http://127.0.0.1:8000/payment/success/"
-    post_body['fail_url'] = "http://127.0.0.1:8000/payment/failed/"
-    post_body['cancel_url'] = "http://127.0.0.1:8000/payment/cancel/"
+    post_body['success_url'] = f"http://{domain}/payment/success/"
+    post_body['fail_url'] = f"http://{domain}/payment/failed/"
+    post_body['cancel_url'] = f"http://{domain}/payment/cancel/"
     post_body['emi_option'] = 0
     post_body['cus_name'] = "test"
     post_body['cus_email'] = "test@test.com"

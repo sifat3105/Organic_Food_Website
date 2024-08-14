@@ -13,7 +13,6 @@
                 <div class="signin-container">
                     <form name="frm-login" method="POST">
                         {% csrf_token %}
-                        {% comment %} {{ form.as_p }} {% endcomment %}
                         <p class="form-row">
                             <label for="fid-name">Username:<span class="requite">*</span></label>
                             {{ form.username }}

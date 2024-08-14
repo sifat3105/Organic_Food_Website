@@ -1,0 +1,6 @@
+version: "2"                  # Specify the version of the configuration format
+tunnels:
+  web:
+    addr: 8000                # Replace with the correct port if needed
+    proto: http
+    hostname: winning-genuinely-lizard.ngrok-free.app

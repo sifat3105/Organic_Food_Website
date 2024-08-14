@@ -344,13 +344,22 @@
                             </div>
                             <div class="minicart-block">
                                 <div class="minicart-contain">
+                                    {% if request.user.is_authenticated %}
                                     <a href="{% url 'cart' %}" class="link-to">
+                                    {% else %}
+                                    <a href="/authentication/sign-in/">
+                                    {% endif %}
                                             <span class="icon-qty-combine">
                                                 <i class="icon-cart-mini biolife-icon"></i>
+                                                {% if request.user.is_authenticated %}
                                                 <span class="qty">{{total_cart_item}}</span>
+                                                {% endif %}
                                             </span>
                                         <span class="title">My Cart -</span>
+                                        {% if request.user.is_authenticated %}
                                         <span class="sub-total">${{cart.get_total_price}}</span>
+                                        {% endif %}
+                                        
                                     </a>
                                     <div class="cart-content">
                                         <div class="cart-inner">
@@ -382,8 +391,13 @@
                                                 
                                             </ul>
                                             <p class="btn-control">
+                                                {% if request.user.is_authenticated %}
                                                 <a href="{% url 'cart' %}" class="btn view-cart">view cart</a>
                                                 <a href="{% url 'checkout' %}" class="btn">checkout</a>
+                                                {% else %}
+                                                <a href="/authentication/sign-in/" class="btn view-cart">view cart</a>
+                                                <a href="/authentication/sign-in/" class="btn">checkout</a>
+                                                {% endif %}
                                             </p>
                                         </div>
                                     </div>

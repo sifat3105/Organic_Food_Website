@@ -1,0 +1,77 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+{% comment %} <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#id_category').change(function() {
+            var url = "{% url 'ajax_load_subcategories' %}";  // AJAX URL to load subcategories
+            var categoryId = $(this).val();
+
+            $.ajax({
+                url: url,
+                data: {
+                    'category_id': categoryId
+                },
+                success: function(data) {
+                    $("#id_subcategory").html(data);
+                }
+            });
+        });
+    });
+</script> {% endcomment %}
+<div class="container mt-5">
+    <h2>Create New Product</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="name" class="form-label">Product Name</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="new_price" class="form-label">New Price</label>
+            <input type="number" class="form-control" id="new_price" name="new_price" step="0.01" required>
+        </div>
+        <div class="mb-3">
+            <label for="old_price" class="form-label">Old Price</label>
+            <input type="number" class="form-control" id="old_price" name="old_price" step="0.01">
+        </div>
+        <div class="mb-3">
+            <label for="brand" class="form-label">Brand</label>
+            <input type="text" class="form-control" id="brand" name="brand">
+        </div>
+        <div class="mb-3">
+            <label for="warranty" class="form-label">Warranty</label>
+            <input type="text" class="form-control" id="warranty" name="warranty">
+        </div>
+        <div class="mb-3">
+            <label for="sku" class="form-label">SKU</label>
+            <input type="text" class="form-control" id="sku" name="sku" required>
+        </div>
+        <div class="mb-3">
+            <label for="quantity" class="form-label">Quantity</label>
+            <input type="number" class="form-control" id="quantity" name="quantity" required>
+        </div>
+        <div class="mb-3">
+            {{ form.category.label_tag }}
+            {{ form.category }}
+        </div>
+        
+        <div class="mb-3">
+            {{ form.subcategory.label_tag }}
+            {{ form.subcategory }}
+        </div>
+        <div class="mb-3">
+            <label for="images" class="form-label">Product Images</label>
+            <input type="file" class="form-control" id="images" name="images" multiple>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Product</button>
+    </form>
+</div>
+
+
+{% endblock content %}

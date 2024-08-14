@@ -30,7 +30,9 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
-    '90be-59-152-14-233.ngrok-free.app',  # Add your ngrok URL here
+    'winning-genuinely-lizard.ngrok-free.app',
+    '0.0.0.0',
+    '192.168.10.25',
 ]
 
 LOGIN_URL = '/authentication/sign-in/'
