@@ -24,6 +24,9 @@ class OrderItem(models.Model):
     product = models.ForeignKey(Product, related_name='order_items', on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.PositiveIntegerField(default=1)
+    
+    def get_total_price(self):
+        return self.product.new_price * self.quantity
 
     def __str__(self):
         return f'OrderItem {self.id} for Order {self.order.id}'
